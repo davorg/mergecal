@@ -1,0 +1,7 @@
+{
+  "title":"Dave's Calendar",
+  "feeds":[
+    "https://example.com/some_calendar.ics",
+    "https://example.com/some_other_calendar_basic.ics",
+  ]
+}
