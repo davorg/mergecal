@@ -13,7 +13,7 @@ I was surprised to see that this didn't seem to exist as a service (or,
 at least, if it does, half an hour of Googling couldn't find it - I think
 Yahoo! Pipes would have done it). But half an hour of Perl hacking produced
 this simple program which uses the
-(Text::vFiles::asData)[https://metacpan.org/release/Text-vFile-asData]
+[Text::vFiles::asData](https://metacpan.org/release/Text-vFile-asData)
 module.
 
 There's a very simple config file. Give your new combined calendar a title
