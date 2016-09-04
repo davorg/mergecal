@@ -1,0 +1,45 @@
+#!/usr/bin/perl -CS
+
+use strict;
+use warnings;
+use 5.010;
+
+use Encode 'encode_utf8';
+
+use Text::vFile::asData;
+use LWP::Simple;
+use JSON;
+
+my $conf_file = shift || 'config.json';
+
+open my $conf_fh, '<', $conf_file or die "$conf_file: $!";
+my $json = do { local $/; <$conf_fh> };
+my $config = decode_json($json);
+
+#my $config = {
+#  title => q[Dave's Calendar],
+#  feeds => [ qw(
+#  https://calendar.google.com/calendar/ical/davorg%40gmail.com/public/basic.ics
+#  https://calendar.google.com/calendar/ical/h43ttm0jj1dracnsrgblvhpjd8%40group.calendar.google.com/public/basic.ics
+#  https://calendar.google.com/calendar/ical/145r8dc13ge9deq55dks5cu0kegecvf0%40import.calendar.google.com/public/basic.ics
+#  )],
+#};
+
+my $combined = {
+  type => 'VCALENDAR',
+  properties => {
+    'X-WR-CALNAME' => [ { value => $config->{title} } ],
+  },
+  objects => [],
+};
+
+for (@{$config->{feeds}}) {
+  my $ics = get($_) or die "Can't get $_";
+  $ics = encode_utf8($ics);
+  open my $fh, '<', \$ics or die $!;
+  my $data = Text::vFile::asData->new->parse( $fh );
+
+  push @{ $combined->{objects} }, @{ $data->{objects}[0]{objects} };
+}
+
+say "$_\r" for Text::vFile::asData->generate_lines($combined);
