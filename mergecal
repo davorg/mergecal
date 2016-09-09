@@ -16,15 +16,6 @@ open my $conf_fh, '<', $conf_file or die "$conf_file: $!";
 my $json = do { local $/; <$conf_fh> };
 my $config = decode_json($json);
 
-#my $config = {
-#  title => q[Dave's Calendar],
-#  feeds => [ qw(
-#  https://calendar.google.com/calendar/ical/davorg%40gmail.com/public/basic.ics
-#  https://calendar.google.com/calendar/ical/h43ttm0jj1dracnsrgblvhpjd8%40group.calendar.google.com/public/basic.ics
-#  https://calendar.google.com/calendar/ical/145r8dc13ge9deq55dks5cu0kegecvf0%40import.calendar.google.com/public/basic.ics
-#  )],
-#};
-
 my $combined = {
   type => 'VCALENDAR',
   properties => {
