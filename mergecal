@@ -5,6 +5,7 @@ use warnings;
 use 5.010;
 
 use Encode 'encode_utf8';
+use open ':std', ':encoding(UTF-8)';
 
 use Text::vFile::asData;
 use LWP::Simple;
