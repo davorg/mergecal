@@ -1,3 +1,6 @@
+**Update:** This repo has been deprecated. Please use
+[App::MergeCal](https://github.com/davorg-cpan/app-mergecal) instead.
+
 # mergecal
 
 Simple program to merge iCal files.
